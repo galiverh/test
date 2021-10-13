@@ -16,7 +16,7 @@ http.createServer(function (request, response) {
                     str+=data
             })
             .on('end',()=>{
-                response.end(str.replace(/www.yotube.com/g,'test-gal.herokuapp.com'))
+                response.end(str.replace(/https://www.yotube.com/g,'https://test-gal.herokuapp.com'))
             })
     })
 }).listen(port);
