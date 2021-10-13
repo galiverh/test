@@ -7,4 +7,5 @@
   },
   "dependencies":{
     "request":"2.x"
+  }
 }
