@@ -4,11 +4,5 @@
   "main": "index.js",
   "engines": {
     "node": "12.x"
-  },
-  "description": "My first heroku app!",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Gali fister",
-  "license": "GPL-3.0"
+  }
 }
