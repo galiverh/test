@@ -1,25 +1,47 @@
-// using the http module
-let http = require('http'),
- 
-// look for PORT environment variable, 
-// else look for CLI argument,
-// else use hard coded value for port 8080
+var http = require('http');
+
 port = process.env.PORT || process.argv[2] || 8080;
- 
-// create a simple server
-let server = http.createServer(function (req, res) {
- 
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-        res.write('hello heroku!', 'utf-8');
-        res.end();
- 
+http.createServer(function(request, response) {
+  var options = {
+    hostname: 'www.youtube.com',
+    port: 80,
+    path: request.url,
+    method: request.method
+  }
+
+  // do proxy request
+  var proxy = http.request(options, function (res) {
+
+    // response back from proxy request
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+
+      // output to browser
+      response.write(chunk, 'binary');
     });
- 
-// listen on the port
-server.listen(port, function () {
- 
-    console.log('app up on port: ' + port);
- 
-});
+
+    res.on('end', function() {
+      // end output to browser
+      response.end();
+      proxy.end();
+    });
+
+    response.writeHead(res.statusCode, res.headers);
+  });
+
+  // handle error
+  proxy.on('error', function(e) {
+    reponse.write("problem with request: " + e.message);
+    reponse.end();
+  });
+
+  // write data to request body
+  request.on('data', function(chunk) {
+    proxy.write(chunk, 'binary');
+  });
+
+  request.on('end', function() {
+    proxy.end();
+  });
+
+}).listen(port);
