@@ -1,4 +1,4 @@
-var http = require('https');
+var http = require('http');
 
 port = process.env.PORT || process.argv[2] || 8080;
 http.createServer(function(request, response) {
