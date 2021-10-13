@@ -1,17 +1,11 @@
-var server = require('http').Server();
-var io = require('socket.io')(server);
+const express = require('express')
+const app = express()
+const port = 80
 
-server.listen(8080, () => console.log(`Server is running on port 8080`));
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-io.on('connection', function (socket) {
-    socket.join('ali');
-    socket.on('msg', function (data) {
-        console.log(data)
-        socket.broadcast.emit('msg',data)
-    })
-    socket.on('stream', function (data) {
-        console.log(data)
- 
-    })
- 
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
 })
