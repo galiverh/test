@@ -3,7 +3,7 @@ var http = require('http');
 port = process.env.PORT || process.argv[2] || 8080;
 http.createServer(function(request, response) {
   var options = {
-    hostname: 'www.youtube.com',
+    hostname: 'www.google.com',
     port: 80,
     path: request.url,
     method: request.method
