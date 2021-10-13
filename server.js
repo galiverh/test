@@ -8,7 +8,7 @@ http.createServer(function (request, response) {
     //     res.on('end',d=>response.end())
     // });
     
-    proxy.get('https://www.google.com'+request.url)
+    proxy.get('https://www.youtube.com'+request.url)
         .on('response', function(res) {
 
             res.on('data', function(data) {
